@@ -16,11 +16,12 @@
 @implementation ViewController
 
 #pragma mark- view live cycle
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-  [DQDownloadManager sharedManager].allowedBackgroundDownload = [[NSUserDefaults standardUserDefaults] boolForKey:@"allowBackgroundDownload"];//设置是否允许后台下载
-  [DQDownloadManager sharedManager].allowedDownloadOnWWAN = false;//设置是否允许蜂窝移动网络下下载
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    [DQDownloadManager sharedManager].allowedBackgroundDownload = YES;//设置是否允许后台下载
+    [DQDownloadManager sharedManager].allowedDownloadOnWWAN = false;//设置是否允许蜂窝移动网络下下载
 }
 
 #pragma mark- delegate
@@ -45,7 +46,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSString *url = self.data[indexPath.row];
-  DQDownloadError error = [[DQDownloadManager sharedManager] startDownloadWithUrl:url extrasData:@{@"index":@"hehe"}];
+  DQDownloadError error = [[DQDownloadManager sharedManager] startDownloadWithUrl:url extrasData:@{@"index":@"需要存入的附加信息"}];
   if (error == DQDownloadErrorNone) {
     NSLog(@"已加入下载队列");
   }

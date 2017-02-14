@@ -137,7 +137,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
       configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.dqfeng.DQDownload.backgroundSession"];
     }
     else {
-      configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.dqfeng.DQDownload.backgroundSession"];
+      configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.dqfeng.DQDownload.backgroundSession"];
     }
     NSOperationQueue *queue            = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount  = 1;
