@@ -1,10 +1,10 @@
 # DQDownloadManager
 
-##DQDownloadManager是基于NSURLSession的并发下载组件
+##DQDownloadManager是基于NSURLSession的一个简单易用的并发下载组件
 
 ##特点
 
-- 支持后台下载
+- 支持在线/离线下载
 - 支持断点下载
 - 可控下载并发数
 - 自动维护下载队列
