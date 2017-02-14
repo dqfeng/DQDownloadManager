@@ -1,0 +1,347 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		036818C51E52BF9F0065DEAB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036818C31E52BF9F0065DEAB /* LaunchScreen.xib */; };
+		03D911251E52BD940075AA47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D911241E52BD940075AA47 /* main.m */; };
+		03D911281E52BD940075AA47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D911271E52BD940075AA47 /* AppDelegate.m */; };
+		03D9112B1E52BD940075AA47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D9112A1E52BD940075AA47 /* ViewController.m */; };
+		03D9112E1E52BD940075AA47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D9112C1E52BD940075AA47 /* Main.storyboard */; };
+		03D911301E52BD940075AA47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03D9112F1E52BD940075AA47 /* Assets.xcassets */; };
+		03D911421E52BE320075AA47 /* DownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D9113B1E52BE320075AA47 /* DownloadCell.m */; };
+		03D911431E52BE320075AA47 /* DownloadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D9113C1E52BE320075AA47 /* DownloadCell.xib */; };
+		03D911441E52BE320075AA47 /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D9113E1E52BE320075AA47 /* DownloadViewController.m */; };
+		03D911451E52BE320075AA47 /* DQDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D911411E52BE320075AA47 /* DQDownloadManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		036818C41E52BF9F0065DEAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		03D911201E52BD930075AA47 /* DQDownloadManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DQDownloadManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03D911241E52BD940075AA47 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		03D911261E52BD940075AA47 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		03D911271E52BD940075AA47 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		03D911291E52BD940075AA47 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		03D9112A1E52BD940075AA47 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		03D9112D1E52BD940075AA47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		03D9112F1E52BD940075AA47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		03D911341E52BD940075AA47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03D9113A1E52BE320075AA47 /* DownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadCell.h; sourceTree = "<group>"; };
+		03D9113B1E52BE320075AA47 /* DownloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadCell.m; sourceTree = "<group>"; };
+		03D9113C1E52BE320075AA47 /* DownloadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadCell.xib; sourceTree = "<group>"; };
+		03D9113D1E52BE320075AA47 /* DownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadViewController.h; sourceTree = "<group>"; };
+		03D9113E1E52BE320075AA47 /* DownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadViewController.m; sourceTree = "<group>"; };
+		03D911401E52BE320075AA47 /* DQDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DQDownloadManager.h; sourceTree = "<group>"; };
+		03D911411E52BE320075AA47 /* DQDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DQDownloadManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03D9111D1E52BD930075AA47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03D911171E52BD930075AA47 = {
+			isa = PBXGroup;
+			children = (
+				03D911221E52BD930075AA47 /* DQDownloadManager */,
+				03D911211E52BD930075AA47 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		03D911211E52BD930075AA47 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03D911201E52BD930075AA47 /* DQDownloadManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03D911221E52BD930075AA47 /* DQDownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				03D9113F1E52BE320075AA47 /* DQDownloadManager */,
+				03D911261E52BD940075AA47 /* AppDelegate.h */,
+				03D911271E52BD940075AA47 /* AppDelegate.m */,
+				03D911291E52BD940075AA47 /* ViewController.h */,
+				03D9112A1E52BD940075AA47 /* ViewController.m */,
+				03D9113D1E52BE320075AA47 /* DownloadViewController.h */,
+				03D9113E1E52BE320075AA47 /* DownloadViewController.m */,
+				03D9113A1E52BE320075AA47 /* DownloadCell.h */,
+				03D9113B1E52BE320075AA47 /* DownloadCell.m */,
+				03D9113C1E52BE320075AA47 /* DownloadCell.xib */,
+				03D9112C1E52BD940075AA47 /* Main.storyboard */,
+				036818C31E52BF9F0065DEAB /* LaunchScreen.xib */,
+				03D9112F1E52BD940075AA47 /* Assets.xcassets */,
+				03D911341E52BD940075AA47 /* Info.plist */,
+				03D911231E52BD940075AA47 /* Supporting Files */,
+			);
+			path = DQDownloadManager;
+			sourceTree = "<group>";
+		};
+		03D911231E52BD940075AA47 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03D911241E52BD940075AA47 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03D9113F1E52BE320075AA47 /* DQDownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				03D911401E52BE320075AA47 /* DQDownloadManager.h */,
+				03D911411E52BE320075AA47 /* DQDownloadManager.m */,
+			);
+			path = DQDownloadManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03D9111F1E52BD930075AA47 /* DQDownloadManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03D911371E52BD940075AA47 /* Build configuration list for PBXNativeTarget "DQDownloadManager" */;
+			buildPhases = (
+				03D9111C1E52BD930075AA47 /* Sources */,
+				03D9111D1E52BD930075AA47 /* Frameworks */,
+				03D9111E1E52BD930075AA47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DQDownloadManager;
+			productName = DQDownloadManager;
+			productReference = 03D911201E52BD930075AA47 /* DQDownloadManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		03D911181E52BD930075AA47 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = dqfeng;
+				TargetAttributes = {
+					03D9111F1E52BD930075AA47 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 03D9111B1E52BD930075AA47 /* Build configuration list for PBXProject "DQDownloadManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 03D911171E52BD930075AA47;
+			productRefGroup = 03D911211E52BD930075AA47 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03D9111F1E52BD930075AA47 /* DQDownloadManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		03D9111E1E52BD930075AA47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				036818C51E52BF9F0065DEAB /* LaunchScreen.xib in Resources */,
+				03D911431E52BE320075AA47 /* DownloadCell.xib in Resources */,
+				03D911301E52BD940075AA47 /* Assets.xcassets in Resources */,
+				03D9112E1E52BD940075AA47 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03D9111C1E52BD930075AA47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03D911451E52BE320075AA47 /* DQDownloadManager.m in Sources */,
+				03D9112B1E52BD940075AA47 /* ViewController.m in Sources */,
+				03D911421E52BE320075AA47 /* DownloadCell.m in Sources */,
+				03D911281E52BD940075AA47 /* AppDelegate.m in Sources */,
+				03D911251E52BD940075AA47 /* main.m in Sources */,
+				03D911441E52BE320075AA47 /* DownloadViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		036818C31E52BF9F0065DEAB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				036818C41E52BF9F0065DEAB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		03D9112C1E52BD940075AA47 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03D9112D1E52BD940075AA47 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		03D911351E52BD940075AA47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		03D911361E52BD940075AA47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		03D911381E52BD940075AA47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DQDownloadManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dqfeng.DQDownloadManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		03D911391E52BD940075AA47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DQDownloadManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dqfeng.DQDownloadManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03D9111B1E52BD930075AA47 /* Build configuration list for PBXProject "DQDownloadManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03D911351E52BD940075AA47 /* Debug */,
+				03D911361E52BD940075AA47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03D911371E52BD940075AA47 /* Build configuration list for PBXNativeTarget "DQDownloadManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03D911381E52BD940075AA47 /* Debug */,
+				03D911391E52BD940075AA47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 03D911181E52BD930075AA47 /* Project object */;
+}
