@@ -1,6 +1,8 @@
 # DQDownloadManager
 
-#特点
+##DQDownloadManager是基于NSURLSession的并发下载组件
+
+##特点
 
 - 支持后台下载
 - 支持断点下载
@@ -10,7 +12,7 @@
 - 下载状态：暂停、下载中、等待、下载失败
 - 支持设置是否允许蜂窝移动网络下下载
 
-#示例
+##示例
 
 ```objc
 [DQDownloadManager sharedManager].allowedBackgroundDownload = YES;//设置是否允许后台下载 
