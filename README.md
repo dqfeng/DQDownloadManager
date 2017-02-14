@@ -30,7 +30,7 @@ NSArray<id<DQDownloadItemProtocol>> *currentDownloadingItems = [DQDownloadManage
 //获取已经下载完整的任务
 NSArray<id<DQDownloadItemProtocol>> *downloadedItems = [DQDownloadManager sharedManager].downloadedItems;
 ```
-- 详细使用参照demo
+- 详细使用请参照demo
 
 ## 安装
 
