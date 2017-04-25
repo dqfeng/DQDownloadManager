@@ -17,6 +17,7 @@
 		03D911431E52BE320075AA47 /* DownloadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D9113C1E52BE320075AA47 /* DownloadCell.xib */; };
 		03D911441E52BE320075AA47 /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D9113E1E52BE320075AA47 /* DownloadViewController.m */; };
 		03D911451E52BE320075AA47 /* DQDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D911411E52BE320075AA47 /* DQDownloadManager.m */; };
+		CB0B97711EAEE89E00596D51 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CB0B97701EAEE89E00596D51 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		03D9113E1E52BE320075AA47 /* DownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadViewController.m; sourceTree = "<group>"; };
 		03D911401E52BE320075AA47 /* DQDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DQDownloadManager.h; sourceTree = "<group>"; };
 		03D911411E52BE320075AA47 /* DQDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DQDownloadManager.m; sourceTree = "<group>"; };
+		CB0B97701EAEE89E00596D51 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		03D911171E52BD930075AA47 = {
 			isa = PBXGroup;
 			children = (
+				CB0B97701EAEE89E00596D51 /* README.md */,
 				03D911221E52BD930075AA47 /* DQDownloadManager */,
 				03D911211E52BD930075AA47 /* Products */,
 			);
@@ -180,6 +183,7 @@
 				03D911451E52BE320075AA47 /* DQDownloadManager.m in Sources */,
 				03D9112B1E52BD940075AA47 /* ViewController.m in Sources */,
 				03D911421E52BE320075AA47 /* DownloadCell.m in Sources */,
+				CB0B97711EAEE89E00596D51 /* README.md in Sources */,
 				03D911281E52BD940075AA47 /* AppDelegate.m in Sources */,
 				03D911251E52BD940075AA47 /* main.m in Sources */,
 				03D911441E52BE320075AA47 /* DownloadViewController.m in Sources */,

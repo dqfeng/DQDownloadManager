@@ -1,8 +1,8 @@
 # DQDownloadManager
 
-##DQDownloadManager是基于NSURLSession的一个简单易用的并发下载组件
+## DQDownloadManager是基于NSURLSession的一个简单易用的并发下载组件
 
-##特点
+## 特点
 
 - 支持在线/离线下载
 - 支持断点下载
@@ -12,12 +12,14 @@
 - 下载状态：暂停、下载中、等待、下载失败
 - 支持设置是否允许蜂窝移动网络下下载
 
-##示例
+## 示例
 
 ```objc
 [DQDownloadManager sharedManager].allowedBackgroundDownload = YES;//设置是否允许后台下载 
 
 [DQDownloadManager sharedManager].allowedDownloadOnWWAN = false;//设置是否允许蜂窝移动网络下下载 
+
+[DQDownloadManager sharedManager].concurrentDownloadingCount = 3;//设置下载并发数
 
 NSString *url = @"http://devstreaming.apple.com/videos/wwdc/2014/210xxksa9s9ewsa/210/210_hd_accessibility_on_ios.mov";
 NSDictionary *extrasData = @{@"key":@"需要存入的附加信息"}
