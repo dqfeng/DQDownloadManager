@@ -87,7 +87,7 @@ NSString *const kResumeData               = @"ResumeData";
 @property (nonatomic,strong) NSMutableDictionary        *downloadedInfoDic;
 @property (nonatomic,strong) NSMutableArray<id<DQDownloadItemProtocol>>    *downloaded_items;
 @property (nonatomic,strong) NSMutableArray<id<DQDownloadItemProtocol>>    *downloading_items;
-@property (nonatomic,strong) NSMutableDictionary        *downloadersDic;
+@property (nonatomic,strong) NSMutableDictionary<NSString *,DQDownloadItem *>        *downloadersDic;
 @property (nonatomic,strong) NSURLSession               *session;
 @property (nonatomic,assign) NSInteger                   currentDownloadingCount;
 @property (nonatomic,copy)   NSString                   * tempDirectory;
@@ -139,6 +139,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
     else {
       configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.dqfeng.DQDownload.backgroundSession"];
     }
+    configuration.HTTPMaximumConnectionsPerHost = 4;
     NSOperationQueue *queue            = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount  = 1;
     configuration.allowsCellularAccess = false;
@@ -320,7 +321,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 - (void)setConcurrentDownloadingCount:(NSInteger)concurrentDownloadingCount
 {
-  _concurrentDownloadingCount = concurrentDownloadingCount > 3?3:concurrentDownloadingCount;
+  _concurrentDownloadingCount = concurrentDownloadingCount > 4?4:concurrentDownloadingCount;
 }
 
 - (void)setAllowedDownloadOnWWAN:(BOOL)allowedDownloadOnWWAN
@@ -360,9 +361,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   }
   NSMutableURLRequest *request   = [[NSMutableURLRequest alloc] initWithURL:requestUrl cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15];
   [self setHttpheadersWithRequest:request];
-  if (extrasData == nil) {
-    extrasData = @{};
-  }
+  if (extrasData == nil) extrasData = @{};
   return [self startDownloadWithRequest:request  extrasData:extrasData];
 }
 
@@ -410,18 +409,18 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 #pragma mark-
 #pragma mark download control
-
 - (void)cancelDownloadTaskWithItem:(DQDownloadItem *)item
 {
   BOOL notCancelable = (item.canceling || (item.downloadTask == nil) || (item.downloadTask.state == NSURLSessionTaskStateCompleted) || (item.downloadTask.state == NSURLSessionTaskStateCanceling));
-  if (notCancelable) {return;}
+  if (notCancelable) return;
   item.canceling = YES;
   dispatch_time_t waitTime = dispatch_time(DISPATCH_TIME_NOW, DISPATCH_TIME_FOREVER);
-
   dispatch_semaphore_t seamphore = dispatch_semaphore_create(0);
   [item.downloadTask cancelByProducingResumeData:^(NSData *resumeData) {
-    item.resumeData = resumeData;
-    dispatch_semaphore_signal(seamphore);
+      dispatch_async(dispatch_get_main_queue(), ^{
+          item.resumeData = resumeData;
+          dispatch_semaphore_signal(seamphore);
+      });
   }];
   dispatch_semaphore_wait(seamphore, waitTime);
   item.canceling = NO;
@@ -566,6 +565,9 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
       default:
         break;
     }
+  }
+  else {
+      return DQDownloadErrorUrlError;
   }
   return DQDownloadErrorNone;
 }
@@ -806,9 +808,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
       }
     }
     else {
-        
       if (downloadItem.downloadState == DQDownloadStateFinished) return ;
-      
       downloadItem.downloadTask = nil;
       NSData *resumeData = nil;
       if (!([[error.userInfo objectForKey:@"NSLocalizedDescription"] isEqualToString:@"cancelled"] && error.code == NSURLErrorCancelled)) {

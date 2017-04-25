@@ -11,7 +11,7 @@
 // Library/cache/DQDownload
 #define kDQDownloadDirectory                           @"DQDownload"
 
-#define kDQDownloadDefaultConcurrentDownloadingCount   3
+#define kDQDownloadDefaultConcurrentDownloadingCount   4
 
 typedef NS_ENUM(NSInteger, DQDownloadState) {
     DQDownloadStateReady,
@@ -64,7 +64,7 @@ typedef void(^ReceiveChallengeHandle)(NSURLSession*session,NSURLSessionTask*task
 @property (nonatomic,readonly) NSArray<id<DQDownloadItemProtocol>>   *downloadingItems;
 ///自定义http请求头
 @property (nonatomic,copy    ) NSDictionary                    *httpHeader;
-@property (nonatomic,assign  ) NSInteger                       concurrentDownloadingCount;//defarlt 2 max 3
+@property (nonatomic,assign  ) NSInteger                       concurrentDownloadingCount;//default 4 max 4
 @property (nonatomic,assign  ) BOOL                            allowedBackgroundDownload;//default YES
 @property (nonatomic,assign  ) BOOL                            allowedDownloadOnWWAN;//default NO
 @property (nonatomic,copy    ) ReceiveChallengeHandle          receiveChallengeHandle;
