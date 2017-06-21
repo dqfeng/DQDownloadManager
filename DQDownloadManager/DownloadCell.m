@@ -96,7 +96,7 @@
 - (void)downloadStateDidChange:(NSNotification *)notification
 {
     id<DQDownloadItemProtocol> item = notification.object;
-    if (![item isEqual:self.item]) {
+    if (item != self.item) {
         return;
     }
     switch ([item downloadState]) {
@@ -138,7 +138,7 @@
 - (void)progressDidChange:(NSNotification *)notification
 {
     id<DQDownloadItemProtocol> item = notification.object;
-    if ([item isEqual:self.item]){
+    if (item == self.item){
         self.progressView.progress = [item downloadProgress];
         if ([item downloadSpeed]) {
             self.speedLabel.text       = [NSString stringWithFormat:@"%@/s",[item downloadSpeed]];

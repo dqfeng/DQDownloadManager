@@ -59,12 +59,12 @@
     cell.speedLabel.hidden          = _segmentedControl.selectedSegmentIndex;
     cell.detailTextLabel.hidden     = _segmentedControl.selectedSegmentIndex;
     if (_segmentedControl.selectedSegmentIndex == 1) {
-        if ([DQDownloadManager sharedManager].downloadedItems.count) {
+        if ([DQDownloadManager sharedManager].downloadedItems.count > 0) {
             item = [DQDownloadManager sharedManager].downloadedItems[indexPath.row];
         }
     }
     else {
-        if ([DQDownloadManager sharedManager].downloadingItems.count) {
+        if ([DQDownloadManager sharedManager].downloadingItems.count > 0) {
             item = [DQDownloadManager sharedManager].downloadingItems[indexPath.row];
         }
     }

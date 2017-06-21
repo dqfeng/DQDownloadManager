@@ -9,9 +9,6 @@
 #import "AppDelegate.h"
 
 #import <objc/runtime.h>
-#define keypath2(OBJ, PATH) \
-(((void)(NO && ((void)OBJ.PATH, NO)), # PATH))
-
 @interface AppDelegate ()
 
 @end
@@ -51,9 +48,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-  char *path = keypath2(self, window.frame);
-  printf("%s",path);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *title = [defaults stringForKey:@"allowBackgroundDownload"];
     if(!title) {

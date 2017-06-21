@@ -203,7 +203,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
         for (NSURLSessionDownloadTask *task in downloadTasks) {
           if (!task.error) {
             [task cancelByProducingResumeData:^(NSData *resumeData) {
-              NSString *url        = task.originalRequest.URL.absoluteString;
+              NSString *url        = task.currentRequest.URL.absoluteString;
               DQDownloadItem *item = manager.downloadersDic[[url md5]];
               item.resumeData = resumeData ?: nil;
             }];
@@ -383,7 +383,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   if ([self isReachable]) {
     if (self.currentDownloadingCount < self.concurrentDownloadingCount) {
       downloadItem.downloadTask = [self.session downloadTaskWithRequest:urlRequest];
-      if (!downloadItem.downloadTask.originalRequest) {
+      if (!downloadItem.downloadTask.currentRequest) {
         [downloadItem.downloadTask cancel];
         return DQDownloadErrorUrlError;
       }
@@ -457,7 +457,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
       item.downloadTask = [self.session downloadTaskWithRequest:request];
     }
   }
-  if (!item.downloadTask.originalRequest) {
+  if (!item.downloadTask.currentRequest) {
     [item.downloadTask cancel];
     return NO;
   }
@@ -730,7 +730,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   NSHTTPURLResponse *response =  (NSHTTPURLResponse*)downloadTask.response;
   if (response.statusCode == 404) return;
   double progress = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
-  NSString *key = [downloadTask.originalRequest.URL.absoluteString md5];
+  NSString *key = [downloadTask.currentRequest.URL.absoluteString md5];
   dispatch_async(dispatch_get_main_queue(), ^{
     DQDownloadItem *item  = self.downloadersDic[key];
     if (item.downloadTask == nil) {
@@ -773,7 +773,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
     [tempUrlStr deleteCharactersInRange:[tempUrlStr rangeOfString:@"file://"]];
     self.tempDirectory = [NSString stringWithString:tempUrlStr];
   }
-  NSString *url              = downloadTask.originalRequest.URL.absoluteString;
+  NSString *url              = downloadTask.currentRequest.URL.absoluteString;
   NSFileManager *fileManager = [NSFileManager defaultManager];
   BOOL fileExists = [fileManager fileExistsAtPath:[self downloadPathWithUrl:url]];
   if (fileExists) return;
@@ -786,10 +786,19 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   }
 }
 
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+willPerformHTTPRedirection:(NSHTTPURLResponse *)response
+        newRequest:(NSURLRequest *)request
+ completionHandler:(void (^)(NSURLRequest * _Nullable))completionHandler
+{
+    
+}
+
+
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    NSString *url = task.originalRequest.URL.absoluteString;
+    NSString *url = task.currentRequest.URL.absoluteString;
     DQDownloadItem *downloadItem = self.downloadersDic[[url md5]];
     if (!downloadItem) {
       [task cancel];
@@ -868,14 +877,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
     self.downloadAllCompleteInbackground();
   }
   NSLog(@"All tasks are finished");
-}
-
-- (void)URLSession:(NSURLSession *)session
-      downloadTask:(NSURLSessionDownloadTask *)downloadTask
- didResumeAtOffset:(int64_t)fileOffset
-expectedTotalBytes:(int64_t)expectedTotalBytes
-{
-  NSLog(@"resume");
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task

@@ -71,7 +71,7 @@
     if (!_data) {
         _data = @[
                   @"http://s9.knowsky.com/bizhi/l/35001-45000/200952904241438473283.jpg",
-                  @"http://devstreaming.apple.com/videos/wwdc/2014/210xxksa9s9ewsa/210/210_sd_accessibility_on_ios.mov",
+                  @"http://203.187.160.133:9011/devstreaming.apple.com/c3pr90ntc0td/videos/wwdc/2014/210xxksa9s9ewsa/210/210_sd_accessibility_on_ios.mov",
                   @"http://devstreaming.apple.com/videos/wwdc/2014/229xx77tq0pmkwo/229/229_sd_advanced_ios_architecture_and_patterns.mov",
                   @"http://devstreaming.apple.com/videos/wwdc/2014/404xxdxsstkaqjb/404/404_sd_advanced_swift.mov",
                   @"http://devstreaming.apple.com/videos/wwdc/2014/413xxr7gdc60u2p/413/413_sd_debugging_in_xcode_6.mov"];
