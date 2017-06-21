@@ -20,6 +20,7 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    NSLog(@"%@",[[DQDownloadManager sharedManager] downloadDirectory]);
     [DQDownloadManager sharedManager].allowedBackgroundDownload = YES;//设置是否允许后台下载
     [DQDownloadManager sharedManager].allowedDownloadOnWWAN = false;//设置是否允许蜂窝移动网络下下载
 }
@@ -69,7 +70,7 @@
 {
     if (!_data) {
         _data = @[
-                  @"http://devstreaming.apple.com/videos/wwdc/2014/210xxksa9s9ewsa/210/210_hd_accessibility_on_ios.mov",
+                  @"http://s9.knowsky.com/bizhi/l/35001-45000/200952904241438473283.jpg",
                   @"http://devstreaming.apple.com/videos/wwdc/2014/210xxksa9s9ewsa/210/210_sd_accessibility_on_ios.mov",
                   @"http://devstreaming.apple.com/videos/wwdc/2014/229xx77tq0pmkwo/229/229_sd_advanced_ios_architecture_and_patterns.mov",
                   @"http://devstreaming.apple.com/videos/wwdc/2014/404xxdxsstkaqjb/404/404_sd_advanced_swift.mov",

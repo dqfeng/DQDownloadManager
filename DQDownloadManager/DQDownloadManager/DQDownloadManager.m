@@ -203,7 +203,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
         for (NSURLSessionDownloadTask *task in downloadTasks) {
           if (!task.error) {
             [task cancelByProducingResumeData:^(NSData *resumeData) {
-              NSString *url        = task.currentRequest.URL.absoluteString;
+              NSString *url        = task.originalRequest.URL.absoluteString;
               DQDownloadItem *item = manager.downloadersDic[[url md5]];
               item.resumeData = resumeData ?: nil;
             }];
@@ -289,6 +289,8 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   }
   if (self.downloading_items.count == 0) {
     [self.session invalidateAndCancel];
+    self.session = nil;
+    [self deleteAllDownloadingTask];
   }
   [self saveDownloadInfo];
 }
@@ -381,7 +383,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   if ([self isReachable]) {
     if (self.currentDownloadingCount < self.concurrentDownloadingCount) {
       downloadItem.downloadTask = [self.session downloadTaskWithRequest:urlRequest];
-      if (!downloadItem.downloadTask.currentRequest) {
+      if (!downloadItem.downloadTask.originalRequest) {
         [downloadItem.downloadTask cancel];
         return DQDownloadErrorUrlError;
       }
@@ -455,7 +457,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
       item.downloadTask = [self.session downloadTaskWithRequest:request];
     }
   }
-  if (!item.downloadTask.currentRequest) {
+  if (!item.downloadTask.originalRequest) {
     [item.downloadTask cancel];
     return NO;
   }
@@ -576,6 +578,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 {
     if ([self.downloadersDic objectForKey:[url md5]]) {
         DQDownloadItem *item = self.downloadersDic[[url md5]];
+        NSData *resumeData = item.resumeData;
         if (item.downloadState == DQDownloadStateDownloading) {
             --self.currentDownloadingCount;
             [self resumeAWaitingItemWithIndex:[self.downloaded_items indexOfObject:item]];
@@ -586,6 +589,17 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
         [self.downloading_items removeObject:item];
         [self.downloadersDic   removeObjectForKey:[url md5]];
         [self.downloadingInfo  removeObject:item];
+        dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+            NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"dqtmp.data"];
+            [resumeData writeToFile:tmpPath atomically:NO];
+            NSDictionary *resumeDataDic = [NSDictionary dictionaryWithContentsOfFile:tmpPath];
+            NSString *fileName = resumeDataDic[@"NSURLSessionResumeInfoTempFileName"];
+            if (fileName) {
+                NSString *downloadTmpFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+                [[NSFileManager defaultManager] removeItemAtPath:downloadTmpFilePath error:nil];
+            }
+            [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
+        });
     }
     else if ([self.downloadedInfoDic objectForKey:[url md5]]) {
         [self.downloadedInfoDic removeObjectForKey:[url md5]];
@@ -595,16 +609,18 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
                 break;
             }
         }
-    
-        NSString *filePath = [self downloadPathWithUrl:url];
-        BOOL fileExist     = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-        NSError *error     = nil;
-        if (fileExist) {
-            [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
-        }
-        if (error) {
-            NSLog(@"%s:删除文件失败：%@",__FUNCTION__,error);
-        }
+        dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+            NSString *filePath = [self downloadPathWithUrl:url];
+            BOOL fileExist     = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+            NSError *error     = nil;
+            if (fileExist) {
+                [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+            }
+            if (error) {
+                NSLog(@"%s:删除文件失败：%@",__FUNCTION__,error);
+            }
+        });
+
     }
 }
 
@@ -665,25 +681,25 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   }
   self.currentDownloadingCount = 0;
   [self.downloading_items removeAllObjects];
-  dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-  [self.session resetWithCompletionHandler:^{dispatch_semaphore_signal(semaphore);}];
-  dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-  if (self.tempDirectory) {
-    NSError *error = nil;
-    NSArray *directoryContents = [[NSFileManager defaultManager]
-                                  contentsOfDirectoryAtPath:self.tempDirectory error:&error];
-    if (error){NSLog(@"%s--error:%@",__func__,error);}
-    error = nil;
-    for(NSString *fileName in directoryContents) {
-      NSString *path = [self.tempDirectory stringByAppendingPathComponent:fileName];
-      BOOL fileExit = [[NSFileManager defaultManager] fileExistsAtPath:path];
-      if (!fileExit) {
+  if (self.session) {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.session resetWithCompletionHandler:^{dispatch_semaphore_signal(semaphore);}];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+  }
+  NSError *error = nil;
+  NSArray *directoryContents = [[NSFileManager defaultManager]
+                                  contentsOfDirectoryAtPath:NSTemporaryDirectory() error:&error];
+  if (error){NSLog(@"%s--error:%@",__func__,error);}
+  error = nil;
+  for(NSString *fileName in directoryContents) {
+    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+    BOOL fileExit = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    if (!fileExit) {
         return;
-      }
-      [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-      if(error) {
+    }
+    [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+    if(error) {
         NSLog(@"%s--delete downloadedFile error:%@",__func__,error);
-      }
     }
   }
   [self saveDownloadInfo];
@@ -714,7 +730,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   NSHTTPURLResponse *response =  (NSHTTPURLResponse*)downloadTask.response;
   if (response.statusCode == 404) return;
   double progress = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
-  NSString *key = [downloadTask.currentRequest.URL.absoluteString md5];
+  NSString *key = [downloadTask.originalRequest.URL.absoluteString md5];
   dispatch_async(dispatch_get_main_queue(), ^{
     DQDownloadItem *item  = self.downloadersDic[key];
     if (item.downloadTask == nil) {
@@ -757,7 +773,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
     [tempUrlStr deleteCharactersInRange:[tempUrlStr rangeOfString:@"file://"]];
     self.tempDirectory = [NSString stringWithString:tempUrlStr];
   }
-  NSString *url              = downloadTask.currentRequest.URL.absoluteString;
+  NSString *url              = downloadTask.originalRequest.URL.absoluteString;
   NSFileManager *fileManager = [NSFileManager defaultManager];
   BOOL fileExists = [fileManager fileExistsAtPath:[self downloadPathWithUrl:url]];
   if (fileExists) return;
@@ -773,7 +789,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    NSString *url = task.currentRequest.URL.absoluteString;
+    NSString *url = task.originalRequest.URL.absoluteString;
     DQDownloadItem *downloadItem = self.downloadersDic[[url md5]];
     if (!downloadItem) {
       [task cancel];
